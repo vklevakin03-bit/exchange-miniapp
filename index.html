@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Обменник</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #1a1a2e; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+  .container { background: #16213e; padding: 30px; border-radius: 16px; width: 320px; }
+  h2 { text-align: center; margin-bottom: 20px; }
+  input, select { width: 100%; padding: 10px; margin: 8px 0; border-radius: 8px; border: none; background: #0f3460; color: #fff; font-size: 16px; box-sizing: border-box; }
+  button { width: 100%; padding: 12px; background: #e94560; border: none; border-radius: 8px; color: #fff; font-size: 16px; cursor: pointer; margin-top: 10px; }
+  button:hover { background: #c73652; }
+  .result { text-align: center; margin-top: 16px; font-size: 18px; color: #00d4aa; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>💱 Обменник</h2>
+  <input type="number" id="amount" placeholder="Сумма" />
+  <select id="from">
+    <option value="USD">USD</option>
+    <option value="EUR">EUR</option>
+    <option value="RUB">RUB</option>
+    <option value="TON">TON</option>
+  </select>
+  <select id="to">
+    <option value="RUB">RUB</option>
+    <option value="USD">USD</option>
+    <option value="EUR">EUR</option>
+    <option value="TON">TON</option>
+  </select>
+  <button onclick="convert()">Конвертировать</button>
+  <div class="result" id="result"></div>
+</div>
+<script>
+  const rates = { USD: 1, EUR: 0.92, RUB: 90, TON: 0.17 };
+  function convert() {
+    const amount = parseFloat(document.getElementById('amount').value);
+    const from = document.getElementById('from').value;
+    const to = document.getElementById('to').value;
+    if (!amount) { document.getElementById('result').innerText = 'Введи сумму'; return; }
+    const result = (amount / rates[from]) * rates[to];
+    document.getElementById('result').innerText = result.toFixed(2) + ' ' + to;
+  }
+</script>
+</body>
+</html>
